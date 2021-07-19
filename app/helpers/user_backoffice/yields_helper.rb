@@ -1,0 +1,2 @@
+module UserBackoffice::YieldsHelper
+end

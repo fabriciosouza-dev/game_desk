@@ -1,0 +1,47 @@
+<h1>Rendimentos dos Funcionários</h1>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <div class="row">
+      <div class="col-md-10">
+        <h6 class="m-0 font-weight-bold text-primary">Lista de Rendimentos</h6>
+      </div>
+      <div class="col-md-2">
+        <%#= link_to new_user_backoffice_yield_path, class: 'btn btn-primary btn-icon-split btn-sm float-right' do %>
+<!--          <span class="icon text-white-50"><i class="fas fa-plus-circle"></i></span>-->
+<!--          <span class="text">Novo</span>-->
+        <%# end %>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Level</th>
+          <th>Xp</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody style="font-weight: bold">
+        <% @user_backoffice_yields.each do |user_backoffice_yield| %>
+          <tr>
+            <td><%= user_backoffice_yield&.employee&.name %></td>
+            <td><%= user_backoffice_yield.level %></td>
+            <td><%= user_backoffice_yield.xp %></td>
+            <td>
+              <%= link_to 'Show', user_backoffice_yield %>
+              <%= link_to 'Edit', edit_user_backoffice_yield_path(user_backoffice_yield) %>
+              <%= link_to 'Destroy', user_backoffice_yield, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<br>
