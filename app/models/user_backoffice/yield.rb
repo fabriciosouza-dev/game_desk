@@ -1,4 +1,4 @@
 class UserBackoffice::Yield < ApplicationRecord
   self.table_name = "gamedesk.yields"
-  belongs_to :requester, class_name: "Requester", foreign_key: :requester_id, primary_key: :requester_id
+  belongs_to :submitter, class_name: "Submitter", foreign_key: :submitter_id, primary_key: :submitter_id
 end

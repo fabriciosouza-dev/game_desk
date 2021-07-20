@@ -40,9 +40,11 @@ ActiveRecord::Schema.define(version: 2021_07_19_195344) do
   end
 
   create_table "submitters", force: :cascade do |t|
-    t.string "name", comment: "Identifica o nome do apresentador"
-    t.string "email", comment: "Identifica o email do apresentador"
-    t.string "phone", comment: "Identifica o telefone do apresentador"
+    t.string "name", comment: "Identifica o nome do funcionario"
+    t.string "email", comment: "Identifica o email do funcionario"
+    t.string "phone", comment: "Identifica o telefone do funcionario"
+    t.decimal "submitter_id", comment: "Identifica o id do zendesk funcionario"
+    t.integer "status", default: 1, comment: "Identifica se ativo ou inativo o funcionario 0-Inativo 1-Ativo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -98,7 +100,7 @@ ActiveRecord::Schema.define(version: 2021_07_19_195344) do
   end
 
   create_table "yields", force: :cascade do |t|
-    t.decimal "requester_id", comment: "Identifica o id do funcionario"
+    t.decimal "submitter_id", comment: "Identifica o id do funcionario"
     t.integer "level", default: 0, comment: "Identifica o nível do funcionario"
     t.decimal "xp", default: "0.0", comment: "Identifica o xp do funcionario"
     t.datetime "created_at", null: false

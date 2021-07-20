@@ -48,8 +48,8 @@ class PopulaTabelaService
       # use the API at https://yoursubdomain.zendesk.com/api/v2
     end
 
-    client.users.each do |user|
-      Requester.where(email: user[:email]).first_or_create(atributos_requester(user)).update_attributes(atributos_requester(user))
+    client.users.select{|x| ['admin', 'agent'].include?(x[:role])}.each do |user|
+      Submitter.where(email: user[:email]).first_or_create(atributos_submitter(user)).update_attributes(atributos_submitter(user))
     end
 
     client.tickets.each do |ticket|
@@ -69,9 +69,9 @@ class PopulaTabelaService
           ticket_object.flag_calc_level = 0
         end
         CalculaLevelService.new(new_ticket: ticket_object,
-                           old_ticket: ticket,
-                           new_comments: new_comments,
-                           old_comments: comments).execute
+                                old_ticket: ticket,
+                                new_comments: new_comments,
+                                old_comments: comments).execute
       else
         comments = []
         new_comments = []
@@ -79,10 +79,10 @@ class PopulaTabelaService
         ticket.comments.each do |comment|
           new_comments << Comment.create(atributos_comments(comment, ticket_object))
         end
-        # CalculaLevelService.new(new_ticket: ticket_object,
-        #                    old_ticket: ticket,
-        #                    new_comments: new_comments,
-        #                    old_comments: comments).execute
+        CalculaLevelService.new(new_ticket: ticket_object,
+                                old_ticket: ticket,
+                                new_comments: new_comments,
+                                old_comments: comments).execute
       end
     end
   end
@@ -105,9 +105,9 @@ class PopulaTabelaService
     }
   end
 
-  def atributos_requester(params)
+  def atributos_submitter(params)
     {
-      requester_id: params[:id],
+      submitter_id: params[:id],
       name: params[:name],
       email: params[:email],
       phone: params[:phone],

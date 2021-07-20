@@ -28,7 +28,7 @@
         <tbody style="font-weight: bold">
         <% @user_backoffice_yields.each do |user_backoffice_yield| %>
           <tr>
-            <td><%= user_backoffice_yield&.employee&.name %></td>
+            <td><%= user_backoffice_yield&.submitter&.name %></td>
             <td><%= user_backoffice_yield.level %></td>
             <td><%= user_backoffice_yield.xp %></td>
             <td>

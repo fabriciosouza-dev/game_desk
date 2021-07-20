@@ -3,7 +3,7 @@ class UserBackoffice::YieldsController < UserBackofficesController
 
   # GET /user_backoffice/yields or /user_backoffice/yields.json
   def index
-    @user_backoffice_yields = UserBackoffice::Yield.eager_load(:employee).all
+    @user_backoffice_yields = UserBackoffice::Yield.eager_load(:submitter).all
   end
 
   # GET /user_backoffice/yields/1 or /user_backoffice/yields/1.json
@@ -65,6 +65,6 @@ class UserBackoffice::YieldsController < UserBackofficesController
 
   # Only allow a list of trusted parameters through.
   def user_backoffice_yield_params
-    params.require(:user_backoffice_yield).permit(:id, :employee_id, :level, :xp)
+    params.require(:user_backoffice_yield).permit(:id, :submitter_id, :level, :xp)
   end
 end
